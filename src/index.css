@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-background text-text min-h-screen;
+    font-family: 'Inter', sans-serif; /* Modern sans-serif */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+    font-family: 'Playfair Display', serif; /* Elegant serif for headlines */
+  }
+
+  /* Custom scrollbar for a sleek look */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1C1C1C; /* Surface color */
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333333; /* Border color */
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888888; /* Text secondary color */
+  }
+}
+
+@layer components {
+  .neon-text-glow {
+    @apply text-text shadow-glow-primary;
+    text-shadow: 0 0 5px var(--tw-shadow-color), 0 0 10px var(--tw-shadow-color);
+  }
+
+  .neon-card-glow {
+    @apply shadow-glow-primary;
+    box-shadow: 0 0 10px var(--tw-shadow-color), 0 0 20px var(--tw-shadow-color);
+  }
+}
+
+/* Custom gradient utility classes */
+.bg-gradient-primary-to-blue {
+  background-image: linear-gradient(to right, #A78BFA, #67E8F9); /* Primary to Secondary */
+}
+
+.text-gradient-primary-to-blue {
+  background-image: linear-gradient(to right, #A78BFA, #67E8F9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Custom styles for react-hot-toast */
+.react-hot-toast-container {
+  z-index: 9999; /* Ensure toasts are on top */
+}
