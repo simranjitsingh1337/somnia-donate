@@ -1,22 +1,4 @@
-export interface Charity {
-  id: string
-  name: string
-  category: string
-  description: string
-  impact: string // e.g., 'direct', 'systemic', 'research', 'community'
-  geography: string // e.g., 'local', 'national', 'international'
-  transparency: string // e.g., 'high', 'medium', 'low'
-  size: string // e.g., 'small', 'medium', 'large', 'any'
-  verified: boolean
-  imageUrl: string
-  targetAmount: number
-  raisedAmount: number
-  address: string // Ethereum address for donations
-  about: string
-  financials: string
-  updates: { date: string; text: string }[]
-  matchScore?: number // Added for AI matching
-}
+import { BigNumberish } from 'ethers'
 
 export interface QuizQuestion {
   id: string
@@ -25,10 +7,30 @@ export interface QuizQuestion {
   options?: { label: string; value: string | number }[]
   min?: number
   max?: number
+  step?: number
 }
 
 export interface QuizAnswers {
-  [key: string]: string | string[] | number
+  [questionId: string]: string | string[] | number | undefined
+}
+
+export interface Charity {
+  id: string
+  name: string
+  category: string // e.g., 'Environment', 'Health', 'Education'
+  description: string
+  impact: 'direct' | 'systemic' | 'research' | 'community' // How impact is measured/focused
+  geography: 'local' | 'national' | 'international'
+  transparency: 'low' | 'medium' | 'high'
+  size: 'small' | 'medium' | 'large' // Organization size
+  verified: boolean // Whether the charity is verified by a third party
+  imageUrl: string
+  targetAmount: number // Target amount in ETH/STT
+  raisedAmount: number // Raised amount in ETH/STT
+  address: string // Ethereum address for donations
+  about: string
+  financials: string
+  updates: { date: string; text: string }[] // Recent news or impact updates
 }
 
 export interface Donation {
@@ -36,20 +38,14 @@ export interface Donation {
   charityId: string
   charityName: string
   donorAddress: string
-  amount: number
-  timestamp: number
-  txHash: string
+  amount: number // Amount in ETH/STT
+  timestamp: number // Unix timestamp
+  txHash: string // Transaction hash
 }
 
-export interface Web3ContextType {
-  provider: any | null
-  signer: any | null
-  address: string | null
-  balance: string | null
-  chainId: number | null
-  connectWallet: () => Promise<void>
-  disconnectWallet: () => void
-  switchNetwork: (chainId: string) => Promise<boolean>
-  loading: boolean
-  error: string | null
+export interface CharityEvent {
+  charityId: string;
+  charityName: string;
+  date: string;
+  text: string;
 }
