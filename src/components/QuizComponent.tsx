@@ -44,8 +44,8 @@ const QuizComponent: React.FC<QuizComponentProps> = ({
                 onClick={() => handleAnswer(currentQuestion.id, option.value)}
                 className={`p-4 rounded-xl border-2 transition-all duration-200 text-left
                   ${answers[currentQuestion.id] === option.value
-                    ? 'bg-gradient-primary-to-blue text-white border-blue-500 shadow-md'
-                    : 'bg-white text-gray-800 border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                    ? 'bg-gradient-to-r from-primary to-secondary text-white border-secondary shadow-md' // Updated for neon theme
+                    : 'bg-surface text-text border-border hover:border-secondary hover:shadow-sm' // Updated for neon theme
                   }`}
               >
                 <span className="font-medium text-lg">{option.label}</span>
@@ -55,17 +55,17 @@ const QuizComponent: React.FC<QuizComponentProps> = ({
         )
       // Add other question types (multiselect, range) if needed
       default:
-        return <p>Question type not supported.</p>
+        return <p className="text-text">Question type not supported.</p>; {/* Added semicolon here */}
     }
   }
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-card animate-fadeInUp">
+    <div className="bg-surface p-8 rounded-xl shadow-card animate-fadeInUp"> {/* Updated for neon theme */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-3xl font-bold text-gray-900">
+        <h2 className="text-3xl font-bold text-text"> {/* Updated for neon theme */}
           {isQuizComplete ? 'Quiz Complete!' : `Question ${currentStep + 1} of ${totalSteps}`}
         </h2>
-        <Button variant="ghost" size="sm" onClick={resetQuiz} className="text-gray-500 hover:text-red-500">
+        <Button variant="ghost" size="sm" onClick={resetQuiz} className="text-textSecondary hover:text-error"> {/* Updated for neon theme */}
           <RefreshCcw size={18} className="mr-2" /> Reset Quiz
         </Button>
       </div>
@@ -74,7 +74,7 @@ const QuizComponent: React.FC<QuizComponentProps> = ({
 
       {!isQuizComplete ? (
         <>
-          <p className="text-xl text-gray-700 mb-8 font-semibold">{currentQuestion?.question}</p>
+          <p className="text-xl text-text mb-8 font-semibold">{currentQuestion?.question}</p> {/* Updated for neon theme */}
           {renderQuestion()}
 
           <div className="flex justify-between mt-8">
@@ -97,13 +97,13 @@ const QuizComponent: React.FC<QuizComponentProps> = ({
         </>
       ) : (
         <div className="text-center py-10">
-          <p className="text-2xl font-semibold text-gray-800 mb-4">
+          <p className="text-2xl font-semibold text-text mb-4"> {/* Updated for neon theme */}
             Thank you for completing the quiz!
           </p>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-textSecondary mb-8"> {/* Updated for neon theme */}
             We've used your preferences to find charities that align with your values.
           </p>
-          <Button onClick={resetQuiz} className="bg-gradient-primary-to-blue">
+          <Button onClick={resetQuiz} className="bg-gradient-to-r from-primary to-secondary"> {/* Updated for neon theme */}
             <RefreshCcw size={20} className="mr-2" /> Retake Quiz
           </Button>
         </div>
