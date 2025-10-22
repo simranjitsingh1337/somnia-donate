@@ -120,7 +120,7 @@ const HomePage: React.FC = () => {
         )}
 
         <div className="text-center mt-12">
-          <Button asChild variant="outline" size="lg" className="border-secondary text-secondary hover:bg-primary/10"> {/* Updated for neon theme */}
+          <Button asChild variant="outline" size="lg" className="px-8 border-secondary text-secondary hover:bg-primary/10"> {/* Updated for neon theme */}
             <Link to="/charities">
               View All Charities <ArrowRight size={20} className="ml-2" />
             </Link>
