@@ -26,13 +26,13 @@ const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16">
-          <Button asChild size="lg" className="px-16 bg-primary text-white hover:bg-primary/90 shadow-neon-glow shadow-primary animate-slideInLeft">
+          <Button asChild size="lg" className="h-24 px-[3.2rem] bg-primary text-white hover:bg-primary/90 shadow-neon-glow shadow-primary animate-slideInLeft">
             <Link to="/charities">
               <Handshake className="mr-2" size={24} />
               Browse Charities
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="px-16 border-secondary text-secondary hover:bg-secondary/10 hover:text-white shadow-neon-glow shadow-secondary animate-slideInRight">
+          <Button asChild variant="outline" size="lg" className="h-24 px-[3.2rem] border-secondary text-secondary hover:bg-secondary/10 hover:text-white shadow-neon-glow shadow-secondary animate-slideInRight">
             <Link to="/dashboard">
               <LayoutDashboard className="mr-2" size={24} />
               My Donations
