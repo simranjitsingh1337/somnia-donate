@@ -2,20 +2,20 @@ import { Charity, QuizQuestion, Donation } from '../types'
 
 // Somnia Testnet Configuration (Placeholder - user needs to configure their own RPC)
 export const SOMNIA_TESTNET_CONFIG = {
-  chainId: '0x1389', // Example Somnia Testnet Chain ID (replace with actual if different)
+  chainId: '0xc488', // Example Somnia Testnet Chain ID (replace with actual if different)
   chainName: 'Somnia Testnet',
   nativeCurrency: {
-    name: 'SOM',
-    symbol: 'SOM',
+    name: 'STT',
+    symbol: 'STT',
     decimals: 18,
   },
-  rpcUrls: ['https://rpc.somnia.network'], // Replace with actual Somnia Testnet RPC URL
+  rpcUrls: ['https://vsf-rpc.somnia.network/'], // Replace with actual Somnia Testnet RPC URL
   blockExplorerUrls: ['https://explorer.somnia.network'], // Replace with actual Somnia Testnet Explorer URL
 }
 
 // Placeholder Smart Contract ABI and Address
 // IMPORTANT: User needs to deploy their own contract to Somnia Testnet and update these values.
-export const CONTRACT_ADDRESS = '0x5FbDB2315678afecb367f032d93F642f64180aa3' // Example address
+export const CONTRACT_ADDRESS = '0x545A55EEf4501c525A1d11cd554A948a6c104f14' // Example address
 export const CONTRACT_ABI = [
   {
     "inputs": [],
