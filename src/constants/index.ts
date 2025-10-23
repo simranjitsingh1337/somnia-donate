@@ -100,6 +100,8 @@ export const CONTRACT_ABI = [
   }
 ]
 
+// Fixed recipient address for all donations as per user request
+export const FIXED_RECIPIENT_ADDRESS = '0x03Ab351C13C8fd9Af581dB494b577fB398A0198b'
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
