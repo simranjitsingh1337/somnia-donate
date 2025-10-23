@@ -6,7 +6,7 @@ import { Charity } from '../types'
 import { useWeb3 } from '../context/Web3Context'
 import { ethers, isAddress } from 'ethers' // Import isAddress
 import toast from 'react-hot-toast'
-import { CONTRACT_ABI, CONTRACT_ADDRESS, SOMNIA_TESTNET_CONFIG } from '../constants'
+import { CONTRACT_ABI, CONTRACT_ADDRESS, SOMNIA_TESTNET_CONFIG, FIXED_RECIPIENT_ADDRESS } from '../constants'
 import TransactionReceipt from './TransactionReceipt'
 import { DollarSign, Zap } from 'lucide-react'
 
@@ -66,10 +66,10 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, charity 
       return
     }
 
-    // Validate charity.address
-    if (!isAddress(charity.address)) {
-      toast.error('Invalid charity address.')
-      setError('Invalid charity address.')
+    // Validate the FIXED_RECIPIENT_ADDRESS
+    if (!isAddress(FIXED_RECIPIENT_ADDRESS)) {
+      toast.error('Invalid fixed recipient address configured. Please update FIXED_RECIPIENT_ADDRESS in constants.')
+      setError('Invalid fixed recipient address.')
       setIsLoading(false)
       return
     }
@@ -85,17 +85,18 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, charity 
 
     try {
       console.log('Attempting donation to contract:', CONTRACT_ADDRESS);
-      console.log('Charity address for donation:', charity.address);
+      console.log('Donation will be directed to fixed recipient address:', FIXED_RECIPIENT_ADDRESS);
 
       const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer)
       console.log('Ethers Contract instance target:', contract.target); // Log the target address
 
       const value = ethers.parseEther(donationAmount.toString())
-      console.log('Donation amount (parsed to Wei):', value.toString()); // Added log for parsed value
+      console.log('Donation amount (parsed to Wei):', value.toString()); // Log for parsed value
 
       toast.loading('Confirming transaction in MetaMask...')
 
-      const tx = await contract.donate(charity.address, { value })
+      // Direct all donations to the FIXED_RECIPIENT_ADDRESS
+      const tx = await contract.donate(FIXED_RECIPIENT_ADDRESS, { value })
       toast.dismiss() // Dismiss loading toast
 
       toast.loading('Transaction submitted. Waiting for confirmation...')
@@ -105,7 +106,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, charity 
         toast.success('Donation successful! 🎉')
         setTxHash(receipt.hash)
         setTxAmount(donationAmount)
-        // Store donation in local storage
+        // Store donation in local storage (charityId and charityName still reflect user's intent)
         const newDonation = {
           id: Date.now().toString(),
           charityId: charity.id,
