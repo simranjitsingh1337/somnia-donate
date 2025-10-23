@@ -91,6 +91,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, charity 
       console.log('Ethers Contract instance target:', contract.target); // Log the target address
 
       const value = ethers.parseEther(donationAmount.toString())
+      console.log('Donation amount (parsed to Wei):', value.toString()); // Added log for parsed value
 
       toast.loading('Confirming transaction in MetaMask...')
 
