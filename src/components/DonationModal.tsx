@@ -4,7 +4,7 @@ import Button from './ui/Button'
 import Input from './ui/Input'
 import { Charity } from '../types'
 import { useWeb3 } from '../context/Web3Context'
-import { ethers } from 'ethers'
+import { ethers, isAddress } from 'ethers' // Import isAddress
 import toast from 'react-hot-toast'
 import { CONTRACT_ABI, CONTRACT_ADDRESS, SOMNIA_TESTNET_CONFIG } from '../constants'
 import TransactionReceipt from './TransactionReceipt'
@@ -58,6 +58,22 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, charity 
       return
     }
 
+    // Validate CONTRACT_ADDRESS
+    if (!isAddress(CONTRACT_ADDRESS)) {
+      toast.error('Invalid smart contract address configured. Please update CONTRACT_ADDRESS in constants.')
+      setError('Invalid smart contract address.')
+      setIsLoading(false)
+      return
+    }
+
+    // Validate charity.address
+    if (!isAddress(charity.address)) {
+      toast.error('Invalid charity address.')
+      setError('Invalid charity address.')
+      setIsLoading(false)
+      return
+    }
+
     if (!signer) {
       toast.error('Wallet not connected or signer not available.')
       return
@@ -68,7 +84,12 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose, charity 
     setTxHash(null)
 
     try {
+      console.log('Attempting donation to contract:', CONTRACT_ADDRESS);
+      console.log('Charity address for donation:', charity.address);
+
       const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer)
+      console.log('Ethers Contract instance target:', contract.target); // Log the target address
+
       const value = ethers.parseEther(donationAmount.toString())
 
       toast.loading('Confirming transaction in MetaMask...')
