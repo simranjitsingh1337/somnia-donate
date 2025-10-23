@@ -15,7 +15,7 @@ export const SOMNIA_TESTNET_CONFIG = {
 
 // Placeholder Smart Contract ABI and Address
 // IMPORTANT: User needs to deploy their own contract to Somnia Testnet and update these values.
-export const CONTRACT_ADDRESS = '0x545A55EEf4501c525A1d11cd554A948a6c104f14' // Example address
+export const CONTRACT_ADDRESS = '0x03Ab351C13C8fd9Af581dB494b577fB398A0198b' // Example address
 export const CONTRACT_ABI = [
   {
     "inputs": [],
